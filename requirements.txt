@@ -9,6 +9,7 @@ cycler==0.10.0
 distlib==0.3.0
 filelock==3.0.12
 Flask==1.1.1
+gunicorn==19.10.0
 h5py==2.10.0
 heroku==0.1.4
 idna==2.8
