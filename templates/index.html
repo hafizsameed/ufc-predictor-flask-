@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visionary Financial</title>
+    <link rel="stylesheet" type='text/css' href="../static/css/start.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/x-icon" href="../static/assets/logo.jpeg" />
+    <style>
+        .img {
+            position: absolute;
+            opacity: 0.5;
+            width: 50px;
+            height: 50px;
+            z-index: 1;
+            margin-top: 0px;
+            margin-left: 80%;
+        }
+
+        .img-more {
+            margin-top: 4.5%;
+        }
+
+        .chart {
+            margin: 5%;
+            box-shadow: 5px 5px 15px gray;
+        }
+
+        .myloader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 400px;
+        }
+
+        .mynavbar {
+            width: 100%;
+            height: 160px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+
+        .logo {
+            height: 100%;
+            width: 400px;
+        }
+
+        .nav-btn {
+            border: 0px;
+            padding: 20px;
+            background-color: #1E1E1E;
+            color: whitesmoke;
+            margin-right: 20px;
+        }
+
+        .myloader2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        #pred_loader {
+            display: none;
+        }
+
+        #logo_img {
+            display: none;
+        }
+
+        .pred_head {
+            padding: 20px;
+            margin-bottom: 5px;
+            text-align: center;
+            font-size: 25px;
+            font-weight: 500;
+            text-transform: capitalize;
+        }
+
+        #clk {
+            margin-top: 20px;
+        }
+
+        .btns-div {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        @media screen and (max-width: 669px) {
+            .logo {
+                width: 250px;
+                height: 70%;
+            }
+
+            .nav-btn {
+                width: 150px;
+                height: 50px;
+                padding: 0px;
+                font-size: 12px;
+            }
+
+        }
+    </style>
+</head>
+
+<body onload="show('bitcoin','BTC')">
+    <div class="mynavbar">
+        <img class="logo" src="../static/assets/VF-1.jpg" alt="">
+        <button type="button" class="nav-btn" data-toggle="modal" data-target="#exampleModalCenter">
+            Show Other Currencies
+        </button>
+    </div>
+
+
+    <div id="main-div">
+        <div id="target" class="myloader">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+        <div class='chart-div'>
+            <!-- <img class='img' src="../static/assets/logo.jpeg" /> -->
+            <div class="chart" id="data"></div>
+        </div>
+        <div class="pred_head">Future Prediction</div>
+        
+        <div class='chart-div'>
+            <!-- <img class="img img-more" src="../static/assets/logo.jpeg" /> -->
+            <div class="chart" id="prediction"></div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Currencies</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="btns-div">
+                        <div style="display: flex;justify-content: space-between;width: 100%;align-items: center;padding: 10px;"
+                            class="each-div">
+                            <div style="display: flex;flex-direction: row;align-items: center;" class='img-text'>
+                                <img style="padding:10px;width: 70px; height: 70px;"
+                                    src="../static/assets/bitcoin.jpg" />
+                                <p style="padding:0;font-size: 20px;margin: 0;">Bitcoin</p>
+                            </div>
+                            <button style="width: 120px;border:0px;padding: 10px;margin:0;" data-dismiss="modal"
+                                onClick='show("bitcoin","BTC")'>Show Charts</button>
+                        </div>
+                        <div style="display: flex;justify-content: space-between;width: 100%;align-items: center;padding: 10px;"
+                            class="each-div">
+                            <div style="display: flex;flex-direction: row;align-items: center;" class='img-text'>
+                                <img style="padding:10px;width: 80px; height: 70px;"
+                                    src="../static/assets/chainlink.png" />
+                                <p style="padding:0;font-size: 20px;margin: 0;">Chainlink</p>
+                            </div>
+                            <button style="width: 120px;border:0px;padding: 10px;margin:0;" data-dismiss="modal"
+                                onClick='show("chainlink","LINK")'>Show Charts</button>
+                        </div>
+                        <div style="display: flex;justify-content: space-between;width: 100%;align-items: center;padding: 10px;"
+                            class="each-div">
+                            <div style="display: flex;flex-direction: row;align-items: center;" class='img-text'>
+                                <img style="padding:10px;width: 70px; height: 70px;" src="../static/assets/xrp.png" />
+                                <p style="padding:0;font-size: 20px;margin: 0;">XRP</p>
+                            </div>
+                            <button style="width: 120px;border:0px;padding: 10px;margin:0;" data-dismiss="modal"
+                                onClick='show("xrp","XRP")'>Show Charts</button>
+                        </div>
+                        <div style="display: flex;justify-content: space-between;width: 100%;align-items: center;padding: 10px;"
+                            class="each-div">
+                            <div style="display: flex;flex-direction: row;align-items: center;" class='img-text'>
+                                <img style="padding:10px;width: 70px; height: 70px;" src="../static/assets/neo.png" />
+                                <p style="padding:0;font-size: 20px;margin: 0;">NEO</p>
+                            </div>
+                            <button style="width: 120px;border:0px;padding: 10px;margin:0;" data-dismiss="modal"
+                                onClick='show("neo","Neo")'>Show Charts</button>
+                        </div>
+                        <div style="display: flex;justify-content: space-between;width: 100%;align-items: center;padding: 10px;"
+                            class="each-div">
+                            <div style="display: flex;flex-direction: row;align-items: center;" class='img-text'>
+                                <img style="padding:10px;width: 70px; height: 70px;"
+                                    src="../static/assets/ethereum.png" />
+                                <p style="padding:0;font-size: 20px;margin: 0;">Ethereum</p>
+                            </div>
+                            <button style="width: 120px;border:0px;padding: 10px;margin:0;" data-dismiss="modal"
+                                onClick='show("ethereum","ETH")'>Show Charts</button>
+                        </div>
+                        <div style="display: flex;justify-content: space-between;width: 100%;align-items: center;padding: 10px;"
+                            class="each-div">
+                            <div style="display: flex;flex-direction: row;align-items: center;" class='img-text'>
+                                <img style="padding:10px;width: 70px; height: 70px;"
+                                    src="../static/assets/litecoin2.png" />
+                                <p style="padding:0;font-size: 20px;margin: 0;">Litecoin</p>
+                            </div>
+                            <button style="width: 120px;border:0px;padding: 10px;margin:0;" data-dismiss="modal"
+                                onClick='show("litecoin","LTC")'>Show Charts</button>
+                        </div>
+                        <div style="display: flex;justify-content: space-between;width: 100%;align-items: center;padding: 10px;"
+                            class="each-div">
+                            <div style="display: flex;flex-direction: row;align-items: center;" class='img-text'>
+                                <img style="padding:10px;width: 70px; height: 70px;" src="../static/assets/dash.png" />
+                                <p style="padding:0;font-size: 20px;margin: 0;">Dash</p>
+                            </div>
+                            <button style="width: 120px;border:0px;padding: 10px;margin:0;" data-dismiss="modal"
+                                onClick='show("dash","DASH")'>Show Charts</button>
+                        </div>
+                        <div style="display: flex;justify-content: space-between;width: 100%;align-items: center;padding: 10px;"
+                            class="each-div">
+                            <div style="display: flex;flex-direction: row;align-items: center;" class='img-text'>
+                                <img style="padding:10px;width: 70px; height: 70px;" src="../static/assets/eos.png" />
+                                <p style="padding:0;font-size: 20px;margin: 0;">EOS</p>
+                            </div>
+                            <button style="width: 120px;border:0px;padding: 10px;margin:0;" data-dismiss="modal"
+                                onClick='show("eos","EOS")'>Show Charts</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+<!-- <script src="https://code.highcharts.com/highcharts.js"></script> -->
+
+<script type="text/javascript">
+
+
+    function show(name, symbol) {
+        var div = document.getElementById('main-div');
+        div.innerHTML = '';
+        var style = document.createElement('style');
+        style.innerHTML = `
+        #target {
+        display:flex ;
+        }
+         `;
+        document.head.appendChild(style);
+        div.innerHTML = ` 
+        <div id="target" class="myloader">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="chart" id="data"></div>
+        </div>
+        <div class="pred_head">Future Prediction</div>
+        <div>
+            <div class="chart" id="prediction"></div>
+        </div>`;
+        getPredictions(`./static/csv/${name}Pred.csv`, 'prediction', name, symbol)
+        getData(`./models/${name}model.json`, 'data', name,symbol,`./models/${name}model.h5`)
+    }
+
+    function getData(filename, chartId, name,symbol,weightname) {
+        fetch(`/data?modelname=${filename}&symbol=${symbol}&weightname=${weightname}`)
+            .then((res) => res.json())
+            .then((data) => {
+                // console.log(data);
+                var current = [];
+                var predictions = []
+                for (i = 0; i < data.actual.length; i++) {
+                    var c = [data.time[i] * 1000, data.actual[i]]
+                    var p = [data.time[i] * 1000, data.y_hat[i]]
+                    current.push(c);
+                    predictions.push(p);
+                }
+                var uname = name.toUpperCase()
+                var mychart = Highcharts.chart(chartId, {
+                    exporting: {
+                        buttons: {
+                            contextButton: {
+                                menuItems: ['downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG'],
+                            },
+                        },
+                    },
+                    chart: {
+                        zoomType: 'x',
+                        events: {
+                            render() {
+                                const chart = this,
+                                    renderer = chart.renderer,
+                                    width = -100;
+
+                                // Delete groups
+                                if (chart.customImgGroup) {
+                                    chart.customImgGroup.destroy();
+                                }
+
+                                // Create groups
+                                chart.customImgGroup = renderer.g('customImgGroup').add();
+
+                                // Render texts
+                                chart.renderer.image('https://www.visionary-finance.com/img/vg-logo.png?v=234', chart.plotLeft + chart.plotSizeX - width, 10, 100, 100)
+                                    .add(chart.customImgGroup);
+                            }
+                        }
+                    },
+                    title: {
+                        text: `Machine Learning Model predictions vs Actual Values`
+                    },
+
+                    subtitle: {
+                        text: `Comparision between Actual and Predicted Values of ${uname}`
+                    },
+
+                    xAxis: {
+                        type: 'datetime',
+                        rotate: 45
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Close Rate'
+                        }
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle'
+                    },
+
+                    plotOptions: {
+                        series: {
+                            label: {
+                                connectorAllowed: false
+                            },
+                            pointStart: 2010
+                        }
+                    },
+
+                    series: [{
+                        name: 'Actual Data',
+                        data: current
+                    }, {
+                        name: 'Data Predicted by ML Model',
+                        data: predictions
+                    }],
+
+
+                    responsive: {
+                        rules: [{
+                            condition: {
+                                maxWidth: 500
+                            },
+                            chartOptions: {
+                                legend: {
+                                    layout: 'horizontal',
+                                    align: 'center',
+                                    verticalAlign: 'bottom'
+                                }
+                            }
+                        }]
+                    }
+
+                }, 
+                // function (chartt) { 
+                //     chartt.renderer.image('https://vf-currencies.herokuapp.com/static/assets/VF-1.jpg', 100, 100, 30, 30)
+                //         .add();
+                // }
+                );
+                var style = document.createElement('style');
+                style.innerHTML = `
+        #target {
+        display:none ;
+        }
+         `;
+                document.head.appendChild(style);
+    })
+            .catch ((err) => console.log(err, 'err in get data'))
+    }
+
+    function getPredictions(filename, chartId, name, symbol) {
+        console.log(window.innerWidth, "inner width")
+        console.log('getPredictions');
+        fetch(`/predictions?filename=${filename}&name=${name}&symbol=${symbol}`)
+            .then(res => res.json())
+            .then((data) => {
+                var prev_data = [];
+                var fut_data = [];
+                var uname = name.toUpperCase();
+                var time = data.time;
+                for (i = 0; i < data.prev_time.length; i++) {
+                    var eachtime = data.prev_time[i];
+                    var conv = new Date(eachtime).getTime()
+                    var p = [conv, data.prev_close[i]]
+                    prev_data.push(p);
+                }
+                for (i = 0; i < data.future_time.length; i++) {
+                    var eachtime = data.future_time[i];
+                    var conv = new Date(eachtime).getTime()
+                    var p = [conv, data.future_close[i]]
+                    fut_data.push(p);
+                }
+                var currentECG = Highcharts.chart(chartId, {
+                    exporting: {
+                        buttons: {
+                            contextButton: {
+                                menuItems: ['downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG'],
+                            },
+                        },
+                    },
+                    chart: {
+                        zoomType: 'x',
+                        events: {
+                            render() {
+                                const chart = this,
+                                    renderer = chart.renderer,
+                                    width = -70;
+
+                                // Delete groups
+                                if (chart.customImgGroup) {
+                                    chart.customImgGroup.destroy();
+                                }
+
+                                // Create groups
+                                chart.customImgGroup = renderer.g('customImgGroup').add();
+
+                                // Render texts
+                                chart.renderer.image('https://www.visionary-finance.com/img/vg-logo.png?v=234', chart.plotLeft + chart.plotSizeX - width, 10, 100, 100)
+                                    .add(chart.customImgGroup);
+                            }
+                        }
+                    },
+                    title: {
+                        text: `${uname}'s previous record and future Predictions`
+                    },
+
+                    subtitle: {
+                        text: `This graph show whole timeline of ${uname} with further predictions 
+                                by Machine Learning Model`
+                    },
+
+                    xAxis: {
+                        type: 'datetime',
+                        rotate: 45,
+                        dateTimeLabelFormats:
+                        {
+                            day: "%e-%b-%y",
+                            month: "%b-%y"
+                        },
+                        plotLines: [{
+                            color: '#FF0000', // Red
+                            width: 2,
+                            value: fut_data[0][0] // Position, you'll have to translate this to the values on your x axis
+                        }]
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Close Rate'
+                        }
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle'
+                    },
+                    plotOptions: {
+                        series: {
+                            stacking: 'normal',
+                            label: {
+                                connectorAllowed: false
+                            },
+                            pointStart: 2010
+                        }
+                    },
+
+                    series: [{
+                        name: `Previous insight of ${uname}`,
+                        data: [...prev_data],
+                        turboThreshold: 6000,
+                    },
+                    {
+                        name: `ML Predictions of ${uname}`,
+                        data: [...fut_data],
+                        turboThreshold: 6000,
+                    },
+                    ],
+
+                    responsive: {
+                        rules: [{
+                            condition: {
+                                maxWidth: 500
+                            },
+                            chartOptions: {
+                                legend: {
+                                    layout: 'horizontal',
+                                    align: 'center',
+                                    verticalAlign: 'bottom'
+                                }
+                            }
+                        }]
+                    }
+
+                });
+
+                
+
+            })
+            .catch((e) => { console.log(e, 'errrrrr') })
+    }
+
+
+
+</script>
