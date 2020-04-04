@@ -4,6 +4,7 @@ from flask import Flask,json,request,jsonify,render_template,redirect
 import requests
 import datetime
 from tensorflow.keras.models import model_from_json
+# from keras_retinanet.models import load_model
 from sklearn.preprocessing import StandardScaler
 
 app = Flask(__name__)
@@ -18,7 +19,6 @@ def loadmodel(modelname,weightname):
     loaded_model.load_weights(weightname)
     print("Loaded model from disk")
     return loaded_model
-
 
 
 
