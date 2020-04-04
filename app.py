@@ -3,7 +3,7 @@ import numpy as np
 from flask import Flask,json,request,jsonify,render_template,redirect
 import requests
 import datetime
-from tensorflow.keras.models import model_from_json
+from keras.models import model_from_json
 # from keras_retinanet.models import load_model
 from sklearn.preprocessing import StandardScaler
 
